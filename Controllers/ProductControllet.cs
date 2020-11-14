@@ -9,7 +9,7 @@ using testeef.Models;
 namespace testeef.Controllers
 {
     [ApiController]
-    [Routes("v1/products")]
+    [Route("v1/products")]
 
     public class ProductController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace testeef.Controllers
         public async Task<ActionResult<List<Product>>> Get([FromServices] DataContext context)
         {
             var products = await context.Products
-                .Include(x = x.Category)
+                .Include(x => x.Category)
                 .ToListAsync();
             return products;
         }
@@ -52,7 +52,7 @@ namespace testeef.Controllers
         [Route("")]
 
         public async Task<ActionResult<Product>> Post(
-            [FromServices] DataContext context
+            [FromServices] DataContext context,
             [FromBody]Product model)
         {
             if (ModelState.IsValid)
