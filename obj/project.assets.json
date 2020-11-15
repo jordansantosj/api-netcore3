@@ -559,11 +559,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jorda\\Desktop\\testeef\\testeef.csproj",
+      "projectUniqueName": "C:\\Users\\Jorda\\Desktop\\api-netcore3\\testeef.csproj",
       "projectName": "testeef",
-      "projectPath": "C:\\Users\\Jorda\\Desktop\\testeef\\testeef.csproj",
+      "projectPath": "C:\\Users\\Jorda\\Desktop\\api-netcore3\\testeef.csproj",
       "packagesPath": "C:\\Users\\Jorda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jorda\\Desktop\\testeef\\obj\\",
+      "outputPath": "C:\\Users\\Jorda\\Desktop\\api-netcore3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jorda\\AppData\\Roaming\\NuGet\\NuGet.Config"
