@@ -14,7 +14,6 @@ namespace testeef.Controllers
     public class ProductController : ControllerBase
     {
         [HttpGet]
-        [Route("")]
 
         public async Task<ActionResult<List<Product>>> Get([FromServices] DataContext context)
         {
@@ -24,8 +23,7 @@ namespace testeef.Controllers
             return products;
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
+        [HttpGet("{id}")]
 
         public async Task<ActionResult<Product>> GetById([FromServices] DataContext context, int id)
         {
@@ -35,8 +33,7 @@ namespace testeef.Controllers
             return product;
         }
 
-        [HttpGet]
-        [Route("categories/{id:int}")]
+        [HttpGet("categories/{id:int}")]
 
         public async Task<ActionResult<List<Product>>> GetByCategory([FromServices] DataContext context, int id)
         {
@@ -49,11 +46,10 @@ namespace testeef.Controllers
         }
 
         [HttpPost]
-        [Route("")]
 
         public async Task<ActionResult<Product>> Post(
             [FromServices] DataContext context,
-            [FromBody]Product model)
+            [FromBody] Product model)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +61,32 @@ namespace testeef.Controllers
             {
                 return BadRequest(ModelState);
             }
+        }
+
+        [HttpDelete("{id}")]
+
+        public async Task<ActionResult> Delete([FromServices] DataContext context, int id){
+            var product = await context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+
+        public async Task<ActionResult> Update([FromServices] DataContext context, int id, Product req){
+            if( id != req.Id ){
+                return BadRequest();
+            }
+
+            var product = await context.Products.Where(product => product.Id == id).FirstOrDefaultAsync();
+            product.Title = req.Title;
+            product.Description = req.Description;
+            product.Price = req.Price;
+            product.CategoryId = req.CategoryId;
+
+            await context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
