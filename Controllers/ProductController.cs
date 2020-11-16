@@ -15,8 +15,10 @@ namespace testeef.Controllers
     {
         [HttpGet]
 
-        public async Task<ActionResult<List<Product>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Product>>> Get(
+            [FromServices] DataContext context)
         {
+
             var products = await context.Products
                 .Include(x => x.Category)
                 .ToListAsync();
@@ -25,8 +27,10 @@ namespace testeef.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<ActionResult<Product>> GetById([FromServices] DataContext context, int id)
+        public async Task<ActionResult<Product>> GetById(
+            [FromServices] DataContext context, int id)
         {
+
             var product = await context.Products.Include(x => x.Category)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -35,8 +39,10 @@ namespace testeef.Controllers
 
         [HttpGet("categories/{id:int}")]
 
-        public async Task<ActionResult<List<Product>>> GetByCategory([FromServices] DataContext context, int id)
+        public async Task<ActionResult<List<Product>>> GetByCategory(
+            [FromServices] DataContext context, int id)
         {
+
             var products = await context.Products
                 .Include(x => x.Category)
                 .AsNoTracking()
@@ -51,6 +57,7 @@ namespace testeef.Controllers
             [FromServices] DataContext context,
             [FromBody] Product model)
         {
+
             if (ModelState.IsValid)
             {
                 context.Products.Add(model);
@@ -65,7 +72,9 @@ namespace testeef.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> Delete([FromServices] DataContext context, int id){
+        public async Task<ActionResult> Delete(
+            [FromServices] DataContext context, int id)
+        {
             var product = await context.Products.Where(x => x.Id == id).FirstOrDefaultAsync();
             context.Products.Remove(product);
             await context.SaveChangesAsync();
@@ -74,8 +83,10 @@ namespace testeef.Controllers
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Update([FromServices] DataContext context, int id, Product req){
-            if( id != req.Id ){
+        public async Task<ActionResult> Update([FromServices] DataContext context, int id, Product req)
+        {
+            if (id != req.Id)
+            {
                 return BadRequest();
             }
 

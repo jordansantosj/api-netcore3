@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace testeef.Models
 {
-    public class Product 
+    public class Product
     {
         [Key]
         public int Id { get; set; }
